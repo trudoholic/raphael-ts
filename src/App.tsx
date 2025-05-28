@@ -22,6 +22,7 @@ function App() {
     })
 
     const ellipse = paper.ellipse(200, 400, 100, 50)
+    const moodText = paper.text(200, 300, 'My\nMood').attr({fill: '#fff', 'font-size': 24});
 
     const tetromino = paper.path("M 250 250 l 0 -50 l -50 0 l 0 -50 l -50 0 l 0 50 l -50 0 l 0 50 z")
     tetromino.attr({

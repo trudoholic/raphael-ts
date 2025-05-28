@@ -6,7 +6,7 @@ import jsPDF from "jspdf"
 function App() {
   const [count, setCount] = useState(0)
 
-  useEffect(() => {
+  function getSVG() {
     const paper = new Raphael(0, 0, 500, 500)
     // const paper = new Raphael(document.getElementById('canvas_container'), 500, 500)
 
@@ -49,12 +49,17 @@ function App() {
     /*/
 
     // console.log(tetromino)
+  }
 
+  useEffect(() => {
+    getSVG()
+  }, [])
+
+  function savePDF() {
     const doc = new jsPDF()
     doc.text("Hello world!", 10, 10)
-    doc.save("a4.pdf")
-
-  }, [])
+    doc.save(`doc${count}.pdf`)
+  }
 
   return (
     <>
@@ -68,7 +73,11 @@ function App() {
       />
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => {
+          setCount((count) => count + 1)
+          savePDF()
+        }}
+        >
           count is {count}
         </button>
         <p>

@@ -10,8 +10,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   function getSVG() {
-    const paper = new Raphael(0, 0, 500, 500)
-    // const paper = new Raphael(document.getElementById('canvas_container'), 500, 500)
+    // const paper = new Raphael(0, 0, 500, 500)
+    const paper = new Raphael(document.getElementById('canvas_container'), 500, 500)
 
     // const circle = paper.circle(100, 100, 80)
     for (let i = 0; i < 5; ++i) {
@@ -83,15 +83,6 @@ function App() {
 
   return (
     <>
-      <div
-        id="canvas_container"
-        style={{
-          width: "500px",
-          height: "50px",
-          border: "1px solid #aaa",
-        }}
-      />
-      <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => {
           setCount((count) => count + 1)
@@ -100,13 +91,15 @@ function App() {
         >
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div
+        id="canvas_container"
+        style={{
+          width: "500px",
+          height: "500px",
+          border: "1px solid #aaa",
+        }}
+      />
     </>
   )
 }

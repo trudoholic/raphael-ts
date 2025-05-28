@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import Raphael from "raphael"
+import jsPDF from "jspdf"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -48,6 +49,11 @@ function App() {
     /*/
 
     // console.log(tetromino)
+
+    const doc = new jsPDF()
+    doc.text("Hello world!", 10, 10)
+    doc.save("a4.pdf")
+
   }, [])
 
   return (

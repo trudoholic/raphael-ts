@@ -2,6 +2,9 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import Raphael from "raphael"
 import jsPDF from "jspdf"
+import html2canvas from 'html2canvas'
+
+let svg
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,7 +26,7 @@ function App() {
     })
 
     const ellipse = paper.ellipse(200, 400, 100, 50)
-    const moodText = paper.text(200, 300, 'My\nMood').attr({fill: '#fff', 'font-size': 24});
+    const moodText = paper.text(200, 300, 'My\nPDF').attr({fill: '#fff', 'font-size': 24});
 
     const tetromino = paper.path("M 250 250 l 0 -50 l -50 0 l 0 -50 l -50 0 l 0 50 l -50 0 l 0 50 z")
     tetromino.attr({
@@ -49,6 +52,8 @@ function App() {
     /*/
 
     // console.log(tetromino)
+    // svg = paper.toSVG()
+    svg = paper.canvas
   }
 
   useEffect(() => {
@@ -56,9 +61,24 @@ function App() {
   }, [])
 
   function savePDF() {
-    const doc = new jsPDF()
-    doc.text("Hello world!", 10, 10)
-    doc.save(`doc${count}.pdf`)
+    //
+    html2canvas(document.querySelector("#canvas_container"))
+      .then(canvas => {
+        // document.body.appendChild(canvas)
+        //
+        const imgData = canvas.toDataURL('image/png')
+
+        const doc = new jsPDF()
+        doc.text("Hello world!", 10, 10)
+        doc.addImage(imgData, 'JPEG', 10, 20)
+        doc.save(`doc${count}.pdf`)
+        //
+      })
+    //
+    // const doc = new jsPDF()
+    // doc.text("Hello world!", 10, 10)
+    // doc.save(`doc${count}.pdf`)
+    //
   }
 
   return (
